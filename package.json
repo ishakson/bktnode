@@ -11,6 +11,10 @@
   "dependencies": {
     "body-parser": "^1.20.3",
     "express": "^4.21.2",
+    "pug": "^3.0.3"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2",
     "nodemon": "^3.1.9"
   }
 }
