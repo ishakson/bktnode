@@ -1,0 +1,80 @@
+extends layouts/main-layout.pug
+
+block title
+    title Main Page
+block content
+  #mySlider.carousel.slide(data-ride="carousel")
+    ol.carousel-indicators
+      li(data-target="mySlide", data-slide-to="0", class="active")
+      li(data-target="mySlide", data-slide-to="1")
+      li(data-target="mySlide", data-slide-to="2")
+    .carousel-inner
+      .carousel-item.active
+        img.d-block.img-fluid(src="/img/slider1.png", alt="")
+      .carousel-item
+        img.d-block.img-fluid(src="/img/slider2.png", alt="")
+      .carousel-item
+        img.d-block.img-fluid(src="/img/slider3.png", alt="")
+    a.carousel-control-prev(href="#mySlider", data-slide="prev")
+      span.carousel-control-prev-icon
+    a.carousel-control-next(href="#mySlider", data-slide="next")
+      span.carousel-control-next-icon
+
+  .row
+    .col-md-4
+      .card.my-3
+        img.card-img-top(src="/img/1.jpg", alt="")
+        .card-body
+          h4.card-title
+            a(href="#") Product Name
+          p.card-text.pt-2 Lorem ipsum dolor sit.
+        .card-footer
+          small.text-muted
+            i.fas.fa-lira-sign
+            | 100
+          a.btn.btn-secondary.btn-sm.float-right(href="#")
+            i.fa.fa-angle-double-right
+            | Details
+    .col-md-4
+      .card.my-3
+        img.card-img-top(src="/img/2.jpg", alt="")
+        .card-body
+          h4.card-title
+            a(href="#") Product Name
+          p.card-text.pt-2 Lorem ipsum dolor sit.
+        .card-footer
+          small.text-muted
+            i.fas.fa-lira-sign
+            | 100
+          a.btn.btn-secondary.btn-sm.float-right(href="#")
+            i.fa.fa-angle-double-right
+            | Details
+    .col-md-4
+      .card.my-3
+        img.card-img-top(src="/img/3.jpg", alt="")
+        .card-body
+          h4.card-title
+            a(href="#") Product Name
+          p.card-text.pt-2 Lorem ipsum dolor sit.
+        .card-footer
+          small.text-muted
+            i.fas.fa-lira-sign
+            | 100
+          a.btn.btn-secondary.btn-sm.float-right(href="#")
+            i.fa.fa-angle-double-right
+            | Details
+    .col-md-4
+      .card.my-3
+        img.card-img-top(src="/img/4.jpg", alt="")
+        .card-body
+          h4.card-title
+            a(href="#") Product Name
+          p.card-text.pt-2 Lorem ipsum dolor sit.
+        .card-footer
+          small.text-muted
+            i.fa.fa-try
+            | 100
+          a.btn.btn-secondary.btn-sm.float-right(href="#")
+            i.fa.fa-angle-double-right
+            | Details
+

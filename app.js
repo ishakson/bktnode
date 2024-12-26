@@ -18,10 +18,11 @@ app.use(userRoutes);
 
 
 app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+    //res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+    res.status(404).render("404");
 });
 
-
+""
 app.listen(3000, () => {
     console.log('listening on port 3000');
 });
