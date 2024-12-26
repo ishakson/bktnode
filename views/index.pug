@@ -1,7 +1,6 @@
 extends layouts/main-layout.pug
 
-block title
-    title Main Page
+
 block content
   #mySlider.carousel.slide(data-ride="carousel")
     ol.carousel-indicators
@@ -21,60 +20,18 @@ block content
       span.carousel-control-next-icon
 
   .row
-    .col-md-4
-      .card.my-3
-        img.card-img-top(src="/img/1.jpg", alt="")
-        .card-body
-          h4.card-title
-            a(href="#") Product Name
-          p.card-text.pt-2 Lorem ipsum dolor sit.
-        .card-footer
-          small.text-muted
-            i.fas.fa-lira-sign
-            | 100
-          a.btn.btn-secondary.btn-sm.float-right(href="#")
-            i.fa.fa-angle-double-right
-            | Details
-    .col-md-4
-      .card.my-3
-        img.card-img-top(src="/img/2.jpg", alt="")
-        .card-body
-          h4.card-title
-            a(href="#") Product Name
-          p.card-text.pt-2 Lorem ipsum dolor sit.
-        .card-footer
-          small.text-muted
-            i.fas.fa-lira-sign
-            | 100
-          a.btn.btn-secondary.btn-sm.float-right(href="#")
-            i.fa.fa-angle-double-right
-            | Details
-    .col-md-4
-      .card.my-3
-        img.card-img-top(src="/img/3.jpg", alt="")
-        .card-body
-          h4.card-title
-            a(href="#") Product Name
-          p.card-text.pt-2 Lorem ipsum dolor sit.
-        .card-footer
-          small.text-muted
-            i.fas.fa-lira-sign
-            | 100
-          a.btn.btn-secondary.btn-sm.float-right(href="#")
-            i.fa.fa-angle-double-right
-            | Details
-    .col-md-4
-      .card.my-3
-        img.card-img-top(src="/img/4.jpg", alt="")
-        .card-body
-          h4.card-title
-            a(href="#") Product Name
-          p.card-text.pt-2 Lorem ipsum dolor sit.
-        .card-footer
-          small.text-muted
-            i.fa.fa-try
-            | 100
-          a.btn.btn-secondary.btn-sm.float-right(href="#")
-            i.fa.fa-angle-double-right
-            | Details
-
+    each product in products
+      .col-md-4
+        .card.my-3
+          img.card-img-top(src=`/img/${product.image}`, alt=`${product.description}`)
+          .card-body
+            h4.card-title
+              a(href="#") #{product.name}
+            p.card-text.pt-2 #{product.description}
+          .card-footer
+            small.text-muted
+              i.fas.fa-lira-sign
+              | #{product.price}
+            a.btn.btn-secondary.btn-sm.float-right(href="#")
+              i.fa.fa-angle-double-right
+              | Details
