@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const path = require('path');
+const products = [
+        {name: "samsunggalaxy", price: "1000", image: "1.jpg", description: "samsung galaxy s10"},
+        {name: "iphone", price: "2000", image: "2.jpg", description: "iphone x"},
+        {name: "samsunggalaxy", price: "1000", image: "3.jpg", description: "samsung galaxy s10"},
+        {name: "iphone", price: "2000", image: "4.jpg", description: "iphone x"}
+    ]
 
 // /admin/add-product=> GET
 router.get('/add-product', (req, res, next) => {
@@ -12,8 +17,10 @@ router.get('/add-product', (req, res, next) => {
 // /admin/add-product=> POST
 router.post('/add-product', (req, res, next) => {
     // database kayıt
-    console.log(req.body);
+    
+   products.push({name: req.body.name, price: req.body.price, image: req.body.image, description: req.body.description});
     res.redirect('/');
 });
 
-module.exports = router;
+exports.routes = router;
+exports.products = products;
