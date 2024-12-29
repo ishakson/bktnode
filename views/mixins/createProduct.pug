@@ -1,0 +1,12 @@
+mixin createProduct(product)
+  .col-md-4
+    .card.my-3
+      img.card-img-top(src=`/img/${product.imageUrl}`, alt=`${product.description}`)
+      .card-body
+        h4.card-title
+          a(href=`/products/${product.id}`) #{product.name}
+        small.text-muted
+          i.fas.fa-lira-sign #{product.price}
+      .card-footer.text-center
+        a(href=`/products/${product.id}`).btn.btn-outline.btn-sm Details
+        a(href="#").btn.btn-outline.btn-sm.ml-3 Add to Cart

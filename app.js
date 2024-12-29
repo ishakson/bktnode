@@ -6,23 +6,20 @@ const path = require('path');
 
 app.set('view engine', 'pug');
 app.set("views", "./views"); 
-const admin = require('./routes/admin');
-const userRoutes = require('./routes/user');
-
+const adminRoutes = require('./routes/admin-route');
+const shopRoutes = require('./routes/shop-route');
+const errorsController = require('./controllers/error-controller');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
+       
 // routes
-app.use('/admin', admin.routes);
-app.use(userRoutes);
+app.use('/admin', adminRoutes);
+app.use(shopRoutes);
 
 
-app.use((req, res) => {
-    //res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-    res.status(404).render("404", { title: "404" });
-});
+app.use(errorsController.get404);
 
-""
+
 app.listen(3000, () => {
     console.log('listening on port 3000');
 });
