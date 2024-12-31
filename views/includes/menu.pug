@@ -1,4 +1,5 @@
+include ../mixins/createCategory.pug
 .list-group
-    a.list-group-item(href="") Category 1
-    a.list-group-item(href="") Category 2
-    a.list-group-item(href="") Category 3
+    if categories.length > 0
+        each category in categories
+            +createCategory(category)

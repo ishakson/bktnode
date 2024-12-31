@@ -5,29 +5,32 @@ block styles
 
 
 block content
-  form(action="/admin/edit-product", method="POST")
+  form(action="/admin/products", 
+  method="POST")
+    input(type="hidden" name="id" value=`${product.id}`)
     .form-group.row
       label.col-sm-2.col-form-label(for="name") Product name
       .col-sm-10
-        input.form-control#name(type="text", name="name")
-
+        input.form-control#name(type="text", name="name" value=`${product.name}`)
+        
     .form-group.row
       label.col-sm-2.col-form-label(for="price") Price
       .col-sm-10
-        input.form-control#price(type="text", name="price")
+        input.form-control#price(type="text", name="price" value=`${product.price}`)
 
     .form-group.row
       label.col-sm-2.col-form-label(for="imageUrl") Image
       .col-sm-10
-        input.form-control#image(type="text", name="imageUrl")
+        input.form-control#image(type="text", name="imageUrl" value=`${product.imageUrl}`)
 
     .form-group.row
       label.col-sm-2.col-form-label(for="description") Description 
       .col-sm-10
-        input.form-control#description(type="text", name="description")
+        textarea.form-control(name="description", cols="30", rows="10")  #{product.description}
+       
 
     .form-group.row
       .col-sm-10.offset-sm-2
         input.btn.btn-primary(type="submit", value="Save Product")
-
+          
 
