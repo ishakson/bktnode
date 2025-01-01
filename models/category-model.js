@@ -23,8 +23,8 @@ module.exports = class Category {
     return categories.find(category => category.id === id);
   }
 
-  static update(id, name) {
-    const category = Category.getCategoryById(id);
+  static update(id, name, description) {
+    const category = Category.getById(id);
     category.name = name;
     category.description = description;
   }

@@ -1,5 +1,6 @@
-include ../mixins/createCategory.pug
+include ../mixins/createCategory
 .list-group
     if categories.length > 0
         each category in categories
             +createCategory(category)
+    

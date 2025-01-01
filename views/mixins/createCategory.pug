@@ -1,3 +1,4 @@
 mixin createCategory(category)
-  a.list-group-item(href=`/categories/${category.id}`) #{category.name}
-  
+    a(href=`/categories/${category.id}` class=category.id===selectedCategory?"list-group-item active" : "list-group-item"
+    ) #{category.name}
+
