@@ -2,22 +2,32 @@ const Product = require("../models/product-model");
 const Category = require("../models/category-model");
 
 exports.getProducts = (req, res, next) => {
-  const products = Product.getAll();
-  res.render("admin/products", {
-    title: "Admin Products",
-    products: products,
-    path: "/admin/products",
-    action: req.query.action,
-  });
+  Product.getAll()
+    .then((products) => {
+      res.render("admin/products", {
+        title: "admin products",
+        path: "/admin/products",
+        products: products[0],
+        action: req.query.action,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.getAddProduct = (req, res, next) => {
-  const categories = Category.getAll();
-  res.render("admin/add-product", {
-    title: "Add Product",
-    path: "/admin/add-product",
-    categories: categories,
-  });
+  Category.getAll()
+    .then((categories) => {
+      res.render("admin/add-product", {
+        title: "Add Product",
+        path: "/admin/add-product",
+        categories: categories[0],
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.postAddProduct = (req, res, next) => {
@@ -28,20 +38,36 @@ exports.postAddProduct = (req, res, next) => {
     req.body.description,
     req.body.categoryid
   );
-  product.saveProduct();
-  res.redirect("/");
+  product
+    .saveProduct()
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.getEditProduct = (req, res, next) => {
-  const product = Product.getById(req.params.productid);
-  const categories = Category.getAll();
-
-  res.render("admin/edit-product", {
-    title: "Edit Product",
-    path: "/admin/products",
-    product: product,
-    categories: categories,
-  });
+  Product.getById(req.params.productid)
+    .then((product) => {
+      Category.getAll()
+        .then((categories) => {
+          res.render("admin/edit-product", {
+            title: "Edit Product",
+            path: "/admin/products",
+            product: product[0][0],
+            categories: categories[0],
+            
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.postEditProduct = (req, res, next) => {
@@ -52,11 +78,21 @@ exports.postEditProduct = (req, res, next) => {
     req.body.imageUrl,
     req.body.description,
     req.body.categoryid
-  );
-  res.redirect("/admin/products?action=edit");
+  )
+    .then(() => {
+      res.redirect("/admin/products?action=edit");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.postDeleteProduct = (req, res, next) => {
-  Product.deleteProduct(req.body.productid);
-  res.redirect("/admin/products?action=delete");
+  Product.deleteProduct(req.body.productid)
+    .then(() => {
+      res.redirect("/admin/products?action=delete");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

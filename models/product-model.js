@@ -1,44 +1,40 @@
-const products = [
-    {id:"1", name: "Product 1", price: "10.00", imageUrl: "1.jpg", description: "Lorem ipsum dol adipiscing eli", category: "1"},
-    {id:"2", name: "Product 2", price: "20.00", imageUrl: "2.jpg", description: "Lorem ipsum dol adipiscing eli", category: "2"},
-];
+const connection = require("../utility/database");
 
+const products = [];
 module.exports = class Product {
-    constructor(name, price, imageUrl, description, category) {
-        this.id = (Math.floor(Math.random() * 9999)+1).toString();
-        this.name = name;
-        this.price = price;
-        this.imageUrl = imageUrl;
-        this.description = description;
-        this.category = category;
-    }
-    saveProduct() {
-        products.push(this);
-    }
+  constructor(name, price, imageUrl, description, category) {
+    this.name = name;
+    this.price = price;
+    this.imageUrl = imageUrl;
+    this.description = description;
+    this.category = category;
+  }
+  saveProduct() {
+    return connection.execute(
+      "INSERT INTO products (name, price, imageUrl, description, categoryid) VALUES (?,?,?,?,?)",
+      [this.name, this.price, this.imageUrl, this.description, this.category]
+    )
+  }
 
-    static getAll(){
-        return products;
-    }
-    static getById(id){
-        return products.find(product => product.id === id);
-    }
+  static getAll() {
+    return connection.execute("SELECT * FROM products");
+  }
+  static getById(id) {
+    return connection.execute("SELECT * FROM products WHERE id = ?", [id]);
+  }
 
-    static updateProduct(id, name, price, imageUrl, description, category){
-        const product = Product.getById(id);
-        product.name = name;
-        product.price = price;
-        product.imageUrl = imageUrl;
-        product.description = description;
-        product.category = category;
-        
-    }
+  static updateProduct(id, name, price, imageUrl, description, category) {
+    return connection.execute(
+      "UPDATE products SET products.name = ?, products.price = ?, products.imageUrl = ?, products.description = ? , products.categoryid = ? WHERE products.id = ?",
+      [name, price, imageUrl, description, category, id]
+    );
+  }
 
-    static deleteProduct(id){
-        products.splice(products.findIndex(product => product.id === id), 1);
-    }
+  static deleteProduct(id) {
+    return connection.execute("DELETE FROM products WHERE id = ?", [id]);
+  }
 
-    static getProductsByCategory(categoryId){
-        return products.filter(product => product.category === categoryId);
-    }
-
+  static getProductsByCategory(categoryId) {
+    return connection.execute("SELECT * FROM products WHERE categoryid = ?", [categoryId]);
+  }
 };

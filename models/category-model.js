@@ -1,38 +1,34 @@
+const connection = require("../utility/database");
 
-var categories = [
-    { id: "1", name: "telefon" , description: "Lorem ipsum dol adipiscing eli"},
-    { id: "2", name: "Category 2" , description: "Lorem ipsum dol adipiscing eli"},
-    { id: "3", name: "Category 3" , description: "Lorem ipsum dol adipiscing eli"},
-]
 module.exports = class Category {
   constructor(name, description) {
-    this.id = (Math.floor(Math.random() * 9999) + 1).toString();
     this.name = name;
     this.description = description;
   }
 
   save() {
-    categories.push(this);
+    return connection.execute(
+      "INSERT INTO categories (name, description) VALUES (?,?)",
+      [this.name, this.description]
+    );
   }
 
   static getAll() {
-    return categories;
+    return connection.execute("SELECT * FROM categories");
   }
 
   static getById(id) {
-    return categories.find(category => category.id === id);
+    return connection.execute("SELECT * FROM categories WHERE id = ?", [id]);
   }
 
   static update(id, name, description) {
-    const category = Category.getById(id);
-    category.name = name;
-    category.description = description;
+    return connection.execute(
+      "UPDATE categories SET categories.name = ?, categories.description = ? WHERE categories.id = ?",
+      [name, description, id]
+    );
   }
 
   static delete(id) {
-    categories.splice(
-      categories.findIndex(category => category.id === id),
-      1
-    );
+    return connection.execute("DELETE FROM categories WHERE id = ?", [id]);
   }
 };
